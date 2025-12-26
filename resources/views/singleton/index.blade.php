@@ -15,6 +15,15 @@
     <form id="slackForm">
         <div class="mb-4">
             <label for="message" class="block text-sm font-medium text-gray-700 mb-2">
+                Last Message Sent:
+            </label>
+            <div>
+                {{ $last_message }}
+            </div>
+
+        </div>
+        <div class="mb-4">
+            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">
                 Message
             </label>
             <textarea

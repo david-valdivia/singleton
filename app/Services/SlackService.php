@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Http;
 class SlackService
 {
     protected ?string $webhook_url = null;
+    protected ?string $last_message = null;
     public function __construct()
     {
         $this->webhook_url = match (config('app.env')) {
@@ -25,10 +26,16 @@ class SlackService
             Http::post($this->webhook_url, [
                 'text' => $message
             ]);
+            $this->last_message = $message;
         } catch (ConnectionException $e) {
             throw new ConnectionException($e->getMessage());
         }
 
         return true;
+    }
+
+    public function getLastMessage(): ?string
+    {
+        return $this->last_message;
     }
 }
