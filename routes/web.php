@@ -1,10 +1,13 @@
 <?php
 
-use App\Http\Controllers\SingletonController;
+use App\Http\Controllers\SlackController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('slack.index');
 });
 
-Route::get('/singleton-demo', [SingletonController::class, 'index']);
+Route::get('/slack', [SlackController::class, 'index'])
+    ->name('slack.index');
+Route::post('/slack/send', [SlackController::class, 'store'])
+    ->name('slack.store');
